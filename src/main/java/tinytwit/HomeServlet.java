@@ -20,7 +20,7 @@ public class HomeServlet extends HttpServlet {
 	}
 	
 	@Override
-	public void doGet(HttpServletRequest req, HttpServletResponse res) 
+	public void doGet(HttpServletRequest req, HttpServletResponse res)
 			throws IOException {
 		
 		try {
@@ -33,7 +33,7 @@ public class HomeServlet extends HttpServlet {
 	}
 	
 	@Override
-	public void doPost(HttpServletRequest req, HttpServletResponse res) 
+	public void doPost(HttpServletRequest req, HttpServletResponse res)
 			throws IOException {
 		
 		Twit t = new Twit(req.getParameter("content"), new Date());
