@@ -10,7 +10,7 @@
 		<h1>Tinytwit (v2)</h1>
 		
 		<div>
-			<h3>Connexion</h3>
+			<h3>Register</h3>
 			<form action="/login" method="post">
 				<p>
 					<label for="username">Name</label>
@@ -20,7 +20,7 @@
 					<label for="password">Password</label>
 					<input type="password" name="password" />
 				<p>
-					<input type="submit" value="Connexion" />
+					<input type="submit" value="S'incrire sur le meilleur site du monde !" />
 				</p>
 			</form>
 		</div>

@@ -3,13 +3,16 @@ package tinytwit;
 import static com.googlecode.objectify.ObjectifyService.ofy;
 
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.Date;
 import java.util.List;
 
 import javax.servlet.ServletException;
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import com.googlecode.objectify.Key;
 import com.googlecode.objectify.ObjectifyService;
@@ -26,6 +29,11 @@ public class HomeServlet extends HttpServlet {
 		
 		List<Twit> twits = ofy().load().type(Twit.class).order("-creation").list();
 		req.setAttribute("twits", twits);
+		
+		HttpSession session = req.getSession();
+		Object a = session.getAttribute("authenticatedUserName");
+	    
+	    res.getWriter().print(a);
 		getServletContext().getRequestDispatcher("/WEB-INF/index.jsp").forward(req, res);
 	}
 	

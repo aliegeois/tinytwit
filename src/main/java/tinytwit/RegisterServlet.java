@@ -11,24 +11,20 @@ import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import com.googlecode.objectify.Key;
 import com.googlecode.objectify.ObjectifyService;
 
-public class LoginServlet extends HttpServlet {
+public class RegisterServlet extends HttpServlet {
 	static {
 		ObjectifyService.register(User.class);
 	}
 	
 	@Override
-	public void doGet(HttpServletRequest req, HttpServletResponse res)
-			throws IOException, ServletException {
-		
-		Cookie ck[]=req.getCookies();  
-	    for(int i=0;i<ck.length;i++){  
-	     res.getWriter().print("<br>"+ck[i].getName()+" "+ck[i].getValue());//printing name and value of cookie  
-	    }
-		getServletContext().getRequestDispatcher("/WEB-INF/login.jsp").forward(req, res);
+	public void doGet(HttpServletRequest req, HttpServletResponse res) throws IOException, ServletException {
+		getServletContext().getRequestDispatcher("/WEB-INF/register.jsp").forward(req, res);
+	    
 	}
 	
 	@Override
@@ -41,6 +37,9 @@ public class LoginServlet extends HttpServlet {
 		User newUser = new User(username);
 		ofy().save().entity(newUser);
 		
+		HttpSession session = req.getSession();
+		session.setAttribute("authenticatedUserName", "name");  
+
 		res.sendRedirect("/");
 	}
 }

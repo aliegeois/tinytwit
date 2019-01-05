@@ -21,6 +21,17 @@
   </servlet-mapping> -->
   
   <servlet>
+  	<servlet-name>Register</servlet-name>
+  	<servlet-class>tinytwit.RegisterServlet</servlet-class>
+  </servlet>
+  
+  <servlet-mapping>
+    <servlet-name>Register</servlet-name>
+    <url-pattern>/register</url-pattern>
+  </servlet-mapping>
+  
+  
+  <servlet>
     <servlet-name>User</servlet-name>
     <servlet-class>tinytwit.UserServlet</servlet-class>
   </servlet>
