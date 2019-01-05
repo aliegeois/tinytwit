@@ -14,10 +14,8 @@ import javax.servlet.http.HttpServletResponse;
 import com.googlecode.objectify.Key;
 import com.googlecode.objectify.ObjectifyService;
 
-public class HomeServlet extends HttpServlet {
+public class LoginServlet extends HttpServlet {
 	static {
-		ObjectifyService.register(User.class);
-		ObjectifyService.register(Twit.class);
 		ObjectifyService.register(User.class);
 	}
 	
@@ -25,12 +23,11 @@ public class HomeServlet extends HttpServlet {
 	public void doGet(HttpServletRequest req, HttpServletResponse res)
 			throws IOException, ServletException {
 		
-		List<Twit> twits = ofy().load().type(Twit.class).order("-creation").list();
-		req.setAttribute("twits", twits);
-		getServletContext().getRequestDispatcher("/WEB-INF/index.jsp").forward(req, res);
-		
-		User u = new User("billy");
-		ofy().save().entity(u);
+		List<User> users = ofy().load().type(User.class).order("+name").list();
+		for(User user : users) {
+			res.getWriter().println(user.name);
+		}
+		getServletContext().getRequestDispatcher("/WEB-INF/login.jsp").forward(req, res);
 	}
 	
 	@Override
@@ -38,10 +35,11 @@ public class HomeServlet extends HttpServlet {
 			throws IOException {
 		
 		String username = req.getParameter("username");
-		Key<User> userkey = Key.create(User.class, username);
-		Twit t = new Twit(req.getParameter("content"), new Date(), userkey);
-		ofy().save().entity(t);
+		String password = req.getParameter("password");
 		
-		res.sendRedirect("/");
+		User newUser = new User(username);
+		ofy().save().entity(newUser);
+		
+		res.sendRedirect("/login");
 	}
 }

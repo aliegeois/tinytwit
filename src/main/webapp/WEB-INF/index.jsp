@@ -19,6 +19,9 @@
 				<textarea name="content" style="width: 200px; height: 100px;"></textarea></label>
 			</p>
 			<p>
+				<label for="name">Name</label>
+				<input type="text" name="username" />
+			<p>
 				<input type="submit" value="Envoyer" />
 			</p>
 		</form>
