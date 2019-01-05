@@ -32,8 +32,9 @@ public class RegisterServlet extends HttpServlet {
 			throws IOException {
 		
 		String username = req.getParameter("username");
-		User u = new User(username);
-		ofy().save().entity(u);
+		
+		User newUser = new User(username);
+		ofy().save().entity(newUser);
 
 		res.sendRedirect("/");
 	}

@@ -49,7 +49,7 @@ public class Twit {
 	}
 	
 	public User getParent() {
-		System.out.println(parent);
+		System.out.println("parent: " + parent);
 		return ofy().load().key(parent).now();
 	}
 }

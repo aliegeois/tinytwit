@@ -44,11 +44,15 @@ public class HomeServlet extends HttpServlet {
 		if(username != null && !"".equals(username)) {
 			Key<User> userkey = Key.create(User.class, username);
 			User u = ofy().load().key(userkey).now();
-			if(u != null) {
+			if(u == null) {
+				res.sendRedirect("/register");
+			} else {
 				Twit t = new Twit(req.getParameter("content"), new Date(), userkey);
 				ofy().save().entity(t);
+				res.sendRedirect("/");
 			}
+		} else {
+			res.sendRedirect("/register");			
 		}
-		res.sendRedirect("/");
 	}
 }
