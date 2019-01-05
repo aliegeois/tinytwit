@@ -5,13 +5,13 @@
 	<head>
 		<meta charset="ISO-8859-1">
 		<!--<link rel="stylesheet" href="./register.css" />-->
-		<!--<style><%@include file="./register.css"%></style>-->
+		<style><%@include file="./register.css"%></style>
 		<title>TinyTwitt, le twitter du futur passé</title>
 	</head>
 	<body>
-		<h1>Tinytwit (v2)</h1>
+		<h1>Tinytwit ¯\_(:/)_/¯</h1>
 		
-		<div>
+		<div id="registering">
 			<h3>Register</h3>
 			<form action="/register" method="post">
 				<p>
