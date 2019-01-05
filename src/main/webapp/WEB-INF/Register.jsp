@@ -11,7 +11,7 @@
 		
 		<div>
 			<h3>Register</h3>
-			<form action="/login" method="post">
+			<form action="/user" method="post">
 				<p>
 					<label for="username">Name</label>
 					<input type="text" name="username" />
@@ -19,6 +19,7 @@
 				<p>
 					<label for="password">Password</label>
 					<input type="password" name="password" />
+				</p>
 				<p>
 					<input type="submit" value="S'incrire sur le meilleur site du monde !" />
 				</p>
