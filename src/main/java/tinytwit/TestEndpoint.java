@@ -2,7 +2,9 @@ package tinytwit;
 
 import static com.googlecode.objectify.ObjectifyService.ofy;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 
 import com.google.api.server.spi.config.Api;
 import com.google.api.server.spi.config.ApiMethod;
@@ -21,19 +23,21 @@ public class TestEndpoint {
 	}
     
     @ApiMethod(
-    	path = "{username}",
+    	path = "user/{username}",
     	httpMethod = HttpMethod.GET
     )
-    public User getMembre(@Named("username") String username) {
-    	//User u = new User(username);
-    	User membre = ofy().load().type(User.class).id(username).now();
-    	
-       // User membre = new User(username);
-        return membre;
+    public Object getUser(@Named("username") String username) {
+    	User u = ofy().load().type(User.class).id(username).now();
+    	return new Object() {
+    		public String bite = u.getName();
+    		public List<String> subscriptions = new ArrayList<>(u.getSubscriptions());
+    		public List<String> subscribers = new ArrayList<>(u.getSubscribers());
+    	};
+    	//return ofy().load().type(User.class).id(username).now();
     }
     
     @ApiMethod(
-    	path = "{username}/twits",
+    	path = "user/{username}/twits",
     	httpMethod = HttpMethod.GET
     )
     public List<Twit> getTwits(@Named("username") String username) {
@@ -41,8 +45,24 @@ public class TestEndpoint {
     }
     
     @ApiMethod(
+    	path = "user/{username}/subscriptions",
+    	httpMethod = HttpMethod.GET
+    )
+    public Set<String> getSubscriptions(@Named("username") String username) {
+    	return ofy().load().type(User.class).id(username).now().getSubscriptions();
+    }
+    
+    @ApiMethod(
+    	path = "user/{username}/subscribers",
+    	httpMethod = HttpMethod.GET
+    )
+    public Set<String> getSubscribers(@Named("username") String username) {
+    	return ofy().load().type(User.class).id(username).now().getSubscribers();
+    }
+    
+    @ApiMethod(
     	path = "subscribe/{user1}/{user2}",
-    	httpMethod = HttpMethod.PUT
+    	httpMethod = HttpMethod.GET
     )
     public void subscribe(@Named("user1") String user1, @Named("user2") String user2) {
     	User u1 = ofy().load().type(User.class).id(user1).now();
@@ -60,7 +80,7 @@ public class TestEndpoint {
     
     @ApiMethod(
     	path = "unsubscribe/{user1}/{user2}",
-    	httpMethod = HttpMethod.PUT
+    	httpMethod = HttpMethod.GET
     )
     public void unsubscribe(@Named("user1") String user1, @Named("user2") String user2) {
     	User u1 = ofy().load().type(User.class).id(user1).now();

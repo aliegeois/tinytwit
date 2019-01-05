@@ -1,5 +1,7 @@
 package tinytwit;
 
+import static com.googlecode.objectify.ObjectifyService.ofy;
+
 import java.io.IOException;
 
 import javax.servlet.Filter;
@@ -11,6 +13,8 @@ import javax.servlet.ServletResponse;
 import javax.servlet.annotation.WebFilter;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
+import org.apache.commons.lang3.StringUtils;
 
 /**
  * Servlet Filter implementation class TestFilter
@@ -27,8 +31,8 @@ public class TestFilter implements Filter {
 		HttpServletRequest req = (HttpServletRequest)request;
 		HttpServletResponse res = (HttpServletResponse)result;
 		System.out.println(req.getRequestURI());
-		String path = req.getRequestURI().substring(1);
-		//int slashes = StringUtils.countMatches(path, "/");
+		/*String path = req.getRequestURI().substring(1);
+		int slashes = StringUtils.countMatches(path, "/");
 		
 		if(path.indexOf("/") != -1) { // Il y a un slash
 			String[] parts = path.split("/");
@@ -45,7 +49,31 @@ public class TestFilter implements Filter {
 				System.out.println("username: " + username);
 				res.sendRedirect("/user/" + username);
 			}
+		}*/
+		
+		String path = req.getRequestURI().substring(1);
+		int slashes = StringUtils.countMatches(path, "/");
+		String[] parts = path.split("/");
+		String username = parts[0];
+		if(slashes >= 1) {
+			String method = parts[1];
+			if(slashes == 2) {
+				if("status".equals(method)) {
+					String id = parts[2];
+					User u = ofy().load().type(User.class).id(username).now();
+					if(u != null) {
+						Twit t = ofy().load().type(Twit.class).parent(u).id(id).now();
+						req.setAttribute("user", u);
+						req.setAttribute("twit", t);
+						chain.doFilter(req, res);
+						return;
+					}
+				}
+			}
+		} else {
+			// redirect to 404
 		}
+		
 	}
 	
 	@Override

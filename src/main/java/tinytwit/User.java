@@ -1,5 +1,6 @@
 package tinytwit;
 
+import java.util.HashSet;
 import java.util.Iterator;
 import java.util.Set;
 
@@ -13,8 +14,8 @@ import com.googlecode.objectify.annotation.Index;
 @Cache
 public class User {
 	@Id String name;
-	Set<String> subscriptions;
-	Set<String> subscribers;
+	Set<String> subscriptions = new HashSet<>();
+	Set<String> subscribers = new HashSet<>();;
 	
 	private User() {}
 	

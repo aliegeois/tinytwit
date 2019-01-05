@@ -12,15 +12,17 @@
 	</head>
 
 	<body>
-		<h1>Tinytwit (v2)</h1>
+		<h1>Tinytwit</h1>
 		<form action="/" method="post">
 			<p>
 				<label>Contenu du twit :<br>
-				<textarea name="content" style="width: 200px; height: 100px;"></textarea></label>
+				<textarea name="content" style="width: 200px; height: 100px;" onkeyup="document.getElementById('carcount').innerHTML = this.value.length"></textarea></label>
+				<span id="carcount">0</span>/70
 			</p>
 			<p>
-				<label for="name">Name</label>
-				<input type="text" name="username" />
+				<label>Name :<br>
+				<input type="text" name="username" /></label>
+				
 			</p>
 			<p>
 				<input type="submit" value="Envoyer" />
@@ -39,7 +41,7 @@
 				for (Twit twit : twits) {
 			%>
 			<tr>
-				<td><%= twit.getParent().getName() %></td>
+				<td><a><%= twit.getParent().getName() %></a></td>
 				<td><%= twit.getContent() %></td>
 				<td><%= twit.getCreation() %></td>
 			</tr>
