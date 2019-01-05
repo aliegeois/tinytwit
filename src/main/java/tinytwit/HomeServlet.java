@@ -17,6 +17,7 @@ import com.googlecode.objectify.ObjectifyService;
 public class HomeServlet extends HttpServlet {
 	static {
 		ObjectifyService.register(Twit.class);
+		ObjectifyService.register(User.class);
 	}
 	
 	@Override
