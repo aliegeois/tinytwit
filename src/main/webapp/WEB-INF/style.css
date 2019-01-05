@@ -155,11 +155,15 @@ h5 {
 #twit_list #twit {
 	text-align: left;
 	padding-left: 5%;
+	border: 1px solid black;
+	word-wrap: break-word;
 }
 #twit_list #twit #author, #twit_list #twit #date {
 	color: var(--main-txt-color);
 }
-
+#twit_list #twit #content {
+	font-size: 20px;
+}
 #lerubanblanc {
 	height: 100%;
 	width: 60%;

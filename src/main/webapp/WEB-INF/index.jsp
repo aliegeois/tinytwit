@@ -17,7 +17,7 @@
 		<div id="lerubanblanc"></div>
 		
 		<nav><a href="/register">deconnexion</a></nav>
-		<h2>Tinytwit ¯\_(:/)_/¯</h2>
+		<h2><a href="/">Tinytwit ¯\_(:/)_/¯</a></h2>
 		
 		<div id="main">
 			
