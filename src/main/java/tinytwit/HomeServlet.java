@@ -3,12 +3,10 @@ package tinytwit;
 import static com.googlecode.objectify.ObjectifyService.ofy;
 
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.util.Date;
 import java.util.List;
 
 import javax.servlet.ServletException;
-import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -44,7 +42,7 @@ public class HomeServlet extends HttpServlet {
 		String username = req.getParameter("username");
 		
 		Key<User> userkey = Key.create(User.class, username);
-		ofy().load().key(userkey);
+		//ofy().load().key(userkey);
 		Twit t = new Twit(req.getParameter("content"), new Date(), userkey);
 		ofy().save().entity(t);
 		
