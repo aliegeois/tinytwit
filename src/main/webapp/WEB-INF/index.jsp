@@ -21,22 +21,31 @@
 			<p>
 				<label for="name">Name</label>
 				<input type="text" name="username" />
+			</p>
 			<p>
 				<input type="submit" value="Envoyer" />
 			</p>
 		</form>
 	
 		<h1>Liste des twits:</h1>
-		<%
-			List<Twit> twits = (List<Twit>) request.getAttribute("twits");
-			for (Twit twit : twits) {
-		%>
-		<p>
-			<%= twit.getContent() %><br>
-			<%= twit.getCreation() %>
-		</p>
-		<%
-			}
-		%>
+		<table border="1">
+			<tr>
+				<th>Nom</th>
+				<th>Twit</th>
+				<th>Date</th>
+			</tr>
+			<%
+				List<Twit> twits = (List<Twit>) request.getAttribute("twits");
+				for (Twit twit : twits) {
+			%>
+			<tr>
+				<td><%= twit.getParent().getName() %></td>
+				<td><%= twit.getContent() %></td>
+				<td><%= twit.getCreation() %></td>
+			</tr>
+			<%
+				}
+			%>
+		</table>
 	</body>
 </html>

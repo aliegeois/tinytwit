@@ -22,10 +22,8 @@ public class UserServlet extends HttpServlet {
 	@Override
 	public void doGet(HttpServletRequest req, HttpServletResponse res)
 			throws IOException, ServletException {
-		System.out.println(req.getPathInfo().substring(1));
-		List<Twit> twits = ofy().load().type(Twit.class).order("-creation").list();
-		req.setAttribute("twits", twits);
-		getServletContext().getRequestDispatcher("/WEB-INF/index.jsp").forward(req, res);
+		
+		getServletContext().getRequestDispatcher("/WEB-INF/user.jsp").forward(req, res);
 	}
 	
 	@Override
@@ -33,10 +31,9 @@ public class UserServlet extends HttpServlet {
 			throws IOException {
 		
 		String username = req.getParameter("username");
-		Key<User> userkey = Key.create(User.class, username);
-		Twit t = new Twit(req.getParameter("content"), new Date(), userkey);
-		ofy().save().entity(t);
+		User u = new User(username);
+		ofy().save().entity(u);
 		
-		res.sendRedirect("/");
+		res.sendRedirect("/user");
 	}
 }

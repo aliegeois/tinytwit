@@ -1,8 +1,11 @@
 package tinytwit;
 
+import static com.googlecode.objectify.ObjectifyService.ofy;
+
 import java.util.Date;
 
 import com.googlecode.objectify.Key;
+import com.googlecode.objectify.ObjectifyService;
 import com.googlecode.objectify.annotation.Cache;
 import com.googlecode.objectify.annotation.Entity;
 import com.googlecode.objectify.annotation.Id;
@@ -13,6 +16,9 @@ import com.googlecode.objectify.annotation.Parent;
 @Index
 @Cache
 public class Twit {
+	static {
+		ObjectifyService.register(User.class);
+	}
 	@Id Long id;
 	@Parent Key<User> parent;
 	String content;
@@ -40,5 +46,10 @@ public class Twit {
 	
 	public Date getCreation() {
 		return creation;
+	}
+	
+	public User getParent() {
+		System.out.println(parent);
+		return ofy().load().key(parent).now();
 	}
 }

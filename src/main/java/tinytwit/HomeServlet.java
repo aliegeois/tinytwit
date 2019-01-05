@@ -18,7 +18,6 @@ public class HomeServlet extends HttpServlet {
 	static {
 		ObjectifyService.register(User.class);
 		ObjectifyService.register(Twit.class);
-		ObjectifyService.register(User.class);
 	}
 	
 	@Override
@@ -28,9 +27,6 @@ public class HomeServlet extends HttpServlet {
 		List<Twit> twits = ofy().load().type(Twit.class).order("-creation").list();
 		req.setAttribute("twits", twits);
 		getServletContext().getRequestDispatcher("/WEB-INF/index.jsp").forward(req, res);
-		
-		User u = new User("billy");
-		ofy().save().entity(u);
 	}
 	
 	@Override
@@ -38,7 +34,9 @@ public class HomeServlet extends HttpServlet {
 			throws IOException {
 		
 		String username = req.getParameter("username");
+		
 		Key<User> userkey = Key.create(User.class, username);
+		ofy().load().key(userkey);
 		Twit t = new Twit(req.getParameter("content"), new Date(), userkey);
 		ofy().save().entity(t);
 		
