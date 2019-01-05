@@ -3,9 +3,27 @@
   --main-bg-color: rgba(235,235,235,1);
   --secondary-bg-color: #e2d2d2;
   --inverted-bg-color: rgba(30,30,30,1);
+  --brighter-bg-color: rgba(245,245,245,1);
   --main-txt-color: #993124;
 }
-
+@font-face {
+	font-family: "above";
+	src: url('./fonts/above.ttf');
+		 
+	font-weight: normal;
+	font-style: normal;
+}
+@font-face {
+	font-family: "sugarpunch";
+	src: url('./fonts/sugarpunch.otf') format('truetype');
+		 
+	font-weight: normal;
+	font-style: normal;
+}
+html {
+	margin: 0;
+	width: 100%;
+}
 * {
 	text-align: center;
 }
@@ -14,47 +32,140 @@ body {
 	margin: 0;
 	width: 100%;
 }
+a {
+	text-decoration: none;
+	color: var(--main-txt-color); 
+}
+
+
+
+
+
+
 h1 {
 	color: var(--main-txt-color);
 	font-size: 80px;
+	font-family: sugarpunch, above;
+	margin-bottom: 10%;
 }
-
 #registering {
-	width: 50%;
+	border: 2px solid var(--main-txt-color);
+	padding: 0px;
+	text-align: center;
 	margin-left: 25%;
-	background-color: var(--secondary-bg-color);
-	padding-top: 1px;
-	padding-bottom: 1px;
-	padding-left: 20px;
-	padding-right: 20px;
+	margin-right: 25%;
 }
-#registering * {
-	text-align: left;
-	font-family: "Trebuchet MS";
-}
-h3 {
-	font-size: 25px;
-	color: var(--inverted-bg-color);
-	
+#registering h3 {
+	margin-top: -16px;
+	width: 20%;
+	margin-left: 40%;
+	font: 25px Trebuchet MS;
+	margin-right: 40%;
+	background-color: var(--main-bg-color);
 }
 #registering #name * {
-	display: block;
-}
-#registering #name input {
-	margin: 0;
-	display: inline-block;
-	color: var(--inverted-bg-color);
-	border: none;
-	width: 25%;
-}
-#registering #submit {
 	text-align: center;
 }
+#registering #name input {
+	color: grey;
+}
 #registering #submit input {
+	color: var(--main-txt-color);
+	padding: 5px;
 	border: 2px solid var(--main-txt-color);
 	border-radius: 3px;
-	padding: 5px;
-	font: 15px "Trebuchet MS";
-	background-color: var(--main-bg-color);
+	font-weight: bold;
+	background-color: var(--secondary-bg-color);
+}
+
+
+
+
+
+
+
+
+
+
+nav {
+	background-color: var(--secondary-bg-color);
+	position: fixed;
+	top: 0%;
+	width: 100%;
+	text-align: right;
+	padding-right: 5%;
+	min-height: 20px;
+}
+nav a {
+	margin-right: 1%;
+	margin-bottom: 3px;
+}
+nav a:hover {
+	color: var(--inverted-bg-color);
+}
+h2 {
 	color: var(--main-txt-color);
+	font-size: 40px;
+	font-family: sugarpunch, above;
+}
+
+
+#main {
+	width: 60%;
+	margin-left: 20%;
+}
+#postTwit {
+	width: 40%;
+	height: 200px;
+	display: inline-block;
+}
+#postTwit textarea {
+	resize: none;
+	width: 80%;
+	height: 100px;
+}
+#postTwit #bottom_layer {
+	width: 80%;
+	margin-left: 10%;
+	text-align: right;
+	height: 30px;
+}
+#postTwit #submit_button {
+	padding: 7px;
+	background-color: var(--main-txt-color);
+	color: var(--inverted-bg-color);
+	font-weight: bold;
+	width: 30%;
+}
+#postTwit #name {
+	height: 100%;
+	width: 60%;
+}
+
+#twit_list {
+	display: inline-block;
+	width: 59%;
+	vertical-align: top;
+	text-align: left;
+}
+h5 {
+	font: 20px Trebuchet MS;
+	color: var(--main-txt-color);
+}
+#twit_list #twit {
+	text-align: left;
+	padding-left: 5%;
+}
+#twit_list #twit #author, #twit_list #twit #date {
+	color: var(--main-txt-color);
+}
+
+#lerubanblanc {
+	height: 100%;
+	width: 60%;
+	position: fixed;
+	top: 0%;
+	left: 20%;
+	z-index: -1;
+	background-color: var(--brighter-bg-color);
 }
