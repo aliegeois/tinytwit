@@ -1,0 +1,60 @@
+@charset "ISO-8859-1";
+:root {
+  --main-bg-color: rgba(235,235,235,1);
+  --secondary-bg-color: #e2d2d2;
+  --inverted-bg-color: rgba(30,30,30,1);
+  --main-txt-color: #993124;
+}
+
+* {
+	text-align: center;
+}
+body {
+	background-color: var(--main-bg-color);
+	margin: 0;
+	width: 100%;
+}
+h1 {
+	color: var(--main-txt-color);
+	font-size: 80px;
+}
+
+#registering {
+	width: 50%;
+	margin-left: 25%;
+	background-color: var(--secondary-bg-color);
+	padding-top: 1px;
+	padding-bottom: 1px;
+	padding-left: 20px;
+	padding-right: 20px;
+}
+#registering * {
+	text-align: left;
+	font-family: "Trebuchet MS";
+}
+h3 {
+	font-size: 25px;
+	color: var(--inverted-bg-color);
+	
+}
+#registering #name * {
+	display: block;
+}
+#registering #name input {
+	margin: 0;
+	display: inline-block;
+	color: var(--inverted-bg-color);
+	border: none;
+	width: 25%;
+}
+#registering #submit {
+	text-align: center;
+}
+#registering #submit input {
+	border: 2px solid var(--main-txt-color);
+	border-radius: 3px;
+	padding: 5px;
+	font: 15px "Trebuchet MS";
+	background-color: var(--main-bg-color);
+	color: var(--main-txt-color);
+}
