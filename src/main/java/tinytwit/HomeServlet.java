@@ -16,6 +16,7 @@ import com.googlecode.objectify.ObjectifyService;
 
 public class HomeServlet extends HttpServlet {
 	static {
+		ObjectifyService.register(User.class);
 		ObjectifyService.register(Twit.class);
 	}
 	
@@ -26,6 +27,9 @@ public class HomeServlet extends HttpServlet {
 		List<Twit> twits = ofy().load().type(Twit.class).order("-creation").list();
 		req.setAttribute("twits", twits);
 		getServletContext().getRequestDispatcher("/WEB-INF/index.jsp").forward(req, res);
+		
+		User u = new User("billy");
+		ofy().save().entity(u);
 	}
 	
 	@Override

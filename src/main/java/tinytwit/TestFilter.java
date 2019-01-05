@@ -41,8 +41,12 @@ public class TestFilter implements Filter {
 			chain.doFilter(req, res);
 		} else { // Il n'y en a pas
 			String username = path;
-			System.out.println("username: " + username);
-			res.sendRedirect("/user/" + username);
+			if("".equals(username)) {
+				chain.doFilter(req, res);
+			} else {
+				System.out.println("username: " + username);
+				res.sendRedirect("/user/" + username);
+			}
 		}
 	}
 	

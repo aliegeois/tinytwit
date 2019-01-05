@@ -18,7 +18,7 @@ public class Twit {
 	String content;
 	Date creation;
 	
-	public Twit() {}
+	private Twit() {}
 	
 	public Twit(String content, Date creation, Key<User> parent) {
 		this.content = content;
