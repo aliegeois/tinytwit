@@ -10,6 +10,6 @@
   </system-properties>
 
 	<static-files>
-		<include path="*.css" />
+		<include path="/css/*.css" />
 	</static-files>
 </appengine-web-app>

@@ -14,7 +14,7 @@ import javax.servlet.http.HttpServletResponse;
 import com.googlecode.objectify.Key;
 import com.googlecode.objectify.ObjectifyService;
 
-public class HomeServlet extends HttpServlet {
+public class UserServlet extends HttpServlet {
 	static {
 		ObjectifyService.register(User.class);
 		ObjectifyService.register(Twit.class);
@@ -24,14 +24,7 @@ public class HomeServlet extends HttpServlet {
 	public void doGet(HttpServletRequest req, HttpServletResponse res)
 			throws IOException, ServletException {
 		
-		List<Twit> twits = ofy().load().type(Twit.class).order("-creation").list();
-		req.setAttribute("twits", twits);
-		
-		//HttpSession session = req.getSession();
-		//Object a = session.getAttribute("authenticatedUserName");
-	    
-	    //res.getWriter().print(a);
-		getServletContext().getRequestDispatcher("/WEB-INF/index.jsp").forward(req, res);
+		getServletContext().getRequestDispatcher("/WEB-INF/user.jsp").forward(req, res);
 	}
 	
 	@Override

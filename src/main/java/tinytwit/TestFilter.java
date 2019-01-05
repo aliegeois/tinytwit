@@ -12,8 +12,6 @@ import javax.servlet.annotation.WebFilter;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.apache.commons.lang3.StringUtils;
-
 /**
  * Servlet Filter implementation class TestFilter
  */
@@ -30,7 +28,7 @@ public class TestFilter implements Filter {
 		HttpServletResponse res = (HttpServletResponse)result;
 		System.out.println(req.getRequestURI());
 		String path = req.getRequestURI().substring(1);
-		int slashes = StringUtils.countMatches(path, "/");
+		//int slashes = StringUtils.countMatches(path, "/");
 		
 		if(path.indexOf("/") != -1) { // Il y a un slash
 			String[] parts = path.split("/");
