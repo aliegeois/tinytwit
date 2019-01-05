@@ -36,9 +36,6 @@ public class RegisterServlet extends HttpServlet {
 		
 		User newUser = new User(username);
 		ofy().save().entity(newUser);
-		
-		HttpSession session = req.getSession();
-		session.setAttribute("authenticatedUserName", "name");  
 
 		res.sendRedirect("/");
 	}
