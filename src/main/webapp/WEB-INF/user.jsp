@@ -83,16 +83,30 @@
             }
         });
         
-        fetch('/_ah/api/tinytwit/v1/user/<%= request.getAttribute("username") %>/twistSubscribed').then(response => {
+        fetch('/_ah/api/tinytwit/v1/user/<%= request.getAttribute("username") %>/twistSubscribed/20').then(response => {
         	return response.json();
-        }).then(twitssubs => {
-        	console.log(twitssubs.length);
-        	let d_subtwits = document.getElementById('subscribed_twits');
-        	for(let twit of twitssubs.items) {
-        		console.log("flagggg");
-            	let p = document.createElement('p');
-            	p.innterHTML = twit.content();
-            	d_subtwits.appendChild(p);
+        }).then(twits => {
+        	console.log(`twits: ${twits}`);
+            let d_twits = document.getElementById('subscribed_twits');
+            for(let twit of twits.items) {
+            	console.log(twit);
+                let d_twit = document.createElement('div'),
+                    parts = twit.content.split(' ');
+                for(let i = 0; i < parts.length; i++) {
+                	if(parts[i].charAt(0) === '#') {
+                		let a_tag = document.createElement('a'),
+                		    txt = parts[i].substring(1);
+                		a_tag.href = '/hashtag/' + txt;
+                		a_tag.innerHTML = txt;
+                		d_twit.appendChild(a_tag);
+                	} else {
+                		d_twit.innerHTML += parts[i];
+                	}
+                	if(i == parts.length - 2)
+                		d_twit.innerHTML += ' ';
+                }
+                d_twit.innerHTML = twit.content;
+                d_twits.appendChild(d_twit);
             }
         });
         
