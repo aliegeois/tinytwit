@@ -155,8 +155,10 @@ h5 {
 #twit_list #twit {
 	text-align: left;
 	padding-left: 5%;
-	border: 1px solid black;
+	border-left: 2px solid var(--main-txt-color);
 	word-wrap: break-word;
+	background-color: white;
+	width: 90%;
 }
 #twit_list #twit #author, #twit_list #twit #date {
 	color: var(--main-txt-color);
