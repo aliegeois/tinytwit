@@ -2,8 +2,7 @@ package tinytwit;
 
 import static com.googlecode.objectify.ObjectifyService.ofy;
 
-import java.util.ArrayList;
-import java.util.Comparator;
+import java.util.Collection;
 import java.util.List;
 import java.util.Set;
 
@@ -13,6 +12,7 @@ import com.google.api.server.spi.config.ApiMethod.HttpMethod;
 import com.google.api.server.spi.config.Named;
 import com.google.appengine.api.datastore.KeyFactory;
 import com.googlecode.objectify.ObjectifyService;
+import com.googlecode.objectify.Ref;
 import com.googlecode.objectify.VoidWork;
 
 
@@ -40,7 +40,7 @@ public class Endpoint {
     	return ofy().load().type(User.class).id(username).now();
     }
     
-    @ApiMethod( //Get all the twits from username
+    @ApiMethod(
     	path = "user/{username}/twits",
     	httpMethod = HttpMethod.GET
     )
@@ -52,11 +52,19 @@ public class Endpoint {
     	path = "hashtag/{hashtag}/twits",
     	httpMethod = HttpMethod.GET
     )
-    public List<Long> getTwitsByHashTag(@Named("hashtag") String hashtag) {
-    	return ofy().load().type(HashTag.class).id(hashtag).now().getTwits();
+    public Collection<Twit> getTwitsByHashTag(@Named("hashtag") String hashtag) {
+    	//ofy().load().type(Twit.class).ids(ofy().load().type(HashTag.class).id(hashtag).now().getTwits());
+    	HashTag h = ofy().load().type(HashTag.class).id(hashtag).now();
+    	if(h != null) {
+    		Collection<Twit> values = ofy().load().refs(h.getTwits()).values();
+    		return values;
+    	}
+    	return null;
+    	//return ofy().load().refs(ofy().load().type(HashTag.class).id(hashtag).now().getTwits()).values();
+    	//return ofy().load().type(HashTag.class).id(hashtag).now().getTwits();
     }
     
-    @ApiMethod( //Get the quantity first twits of username
+    @ApiMethod(
     	path = "user/{username}/twits/{quantity}",
     	httpMethod = HttpMethod.GET
     )
@@ -69,11 +77,10 @@ public class Endpoint {
     	httpMethod = HttpMethod.GET
     )
     public Set<String> getSubscriptions(@Named("username") String username) {
-    	System.out.println("flag 1");
     	return ofy().load().type(User.class).id(username).now().getSubscriptions();
     }
     
-    @ApiMethod( // Get the list of users username is subscribed to
+    @ApiMethod(
     	path = "user/{username}/subscribers",
     	httpMethod = HttpMethod.GET
     )
@@ -81,30 +88,6 @@ public class Endpoint {
     	return ofy().load().type(User.class).id(username).now().getSubscribers();
     }
     
-    @ApiMethod( //Get the twits of the persons username is subscribed to
-    		path = "user/{username}/twistSubscribed",
-        	httpMethod = HttpMethod.GET
-    )
-    public List<Twit> getSubscribedTwit(@Named("username") String username) {
-    	System.out.println("flag 0");
-    	Set<String> subscriptions = this.getSubscriptions(username);
-    	List<Twit> twits = new ArrayList<Twit>();
-    	for(String subscib : subscriptions) {
-    		//twits.addAll(this.getTwitsByQuantity(username, 20));
-    		twits.addAll(this.getTwits(subscib));
-    	}
-    	
-    	twits.sort(new Comparator<Twit>() {
-    	    @Override
-    	    public int compare(Twit t1, Twit t2) {
-    	        return t1.creation.compareTo(t2.creation);
-    	    }
-    	});
-    	
-    	System.out.println("Taille : " + twits.size());
-    	return twits;
-    	
-    }
     @ApiMethod(
     	path = "subscribe/{user1}/{user2}",
     	httpMethod = HttpMethod.GET
