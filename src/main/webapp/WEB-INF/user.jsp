@@ -11,13 +11,21 @@
     <body>
         <h1>Liste des twits de <%= request.getAttribute("username") %></h1>
         <div id="twits"></div>
+        
         <h2>Abonnements</h2>
         <div id="subscriptions"></div>
+        
         <h2>Abonnés</h2>
         <div id="subscribers"></div>
+        
+        <h2>Les twits recommandés pour vous</h2>
+        <div id="subscribed_twits"></div>
+        
         <h2>S'abonner à <%= request.getAttribute("username") %></h2>
-        Votre nom: <input id="your_name" type="text">
+        <label>Votre nom: </label><input id="your_name" type="text">
         <button id="to_sub">S'abonner !</button>
+        
+        
         <script>
         fetch('/_ah/api/tinytwit/v1/user/<%= request.getAttribute("username") %>/twits').then(response => {
             return response.json();
@@ -43,6 +51,7 @@
                 d_twits.appendChild(d_twit);
             }
         });
+        
         fetch('/_ah/api/tinytwit/v1/user/<%= request.getAttribute("username") %>/subscriptions').then(response => {
             return response.json();
         }).then(subs => {
@@ -56,6 +65,8 @@
                 d_subs.appendChild(d_sub);
             }
         });
+        
+        
         fetch('/_ah/api/tinytwit/v1/user/<%= request.getAttribute("username") %>/subscribers').then(response => {
             return response.json();
         }).then(subs => {
@@ -69,6 +80,20 @@
                 d_subs.appendChild(d_sub);
             }
         });
+        
+        fetch('/_ah/api/tinytwit/v1/user/<%= request.getAttribute("username") %>/twistSubscribed').then(response => {
+        	return response.json();
+        }).then(twitssubs => {
+        	console.log(twitssubs.length);
+        	let d_subtwits = document.getElementById('subscribed_twits');
+        	for(let twit of twitssubs.items) {
+        		console.log("flagggg");
+            	let p = document.createElement('p');
+            	p.innterHTML = twit.content();
+            	d_subtwits.appendChild(p);
+            }
+        });
+        
         document.getElementById('to_sub').addEventListener('click', () => {
         	let name = document.getElementById('your_name').value;
         	fetch('/_ah/api/tinytwit/v1/subscribe/' + name + '/<%= request.getAttribute("username") %>').then(() => {
