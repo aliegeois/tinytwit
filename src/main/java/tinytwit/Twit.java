@@ -51,4 +51,5 @@ public class Twit {
 	public User getParent() {
 		return ofy().load().key(parent).now();
 	}
+	
 }
