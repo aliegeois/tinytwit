@@ -91,16 +91,15 @@ public class Endpoint {
     }
     
     @ApiMethod( //Get the twits of the persons username is subscribed to
-    		path = "user/{username}/twistSubscribed",
+    		path = "user/{username}/twistSubscribed/{quantity}",
         	httpMethod = HttpMethod.GET
     )
-    public List<Twit> getSubscribedTwit(@Named("username") String username) {
-    	//System.out.println("flag 0");
+    public List<Twit> getSubscribedTwit(@Named("username") String username, @Named("quantity") int quantity) {
+    	System.out.println("flag 0");
     	Set<String> subscriptions = this.getSubscriptions(username);
     	List<Twit> twits = new ArrayList<Twit>();
     	for(String subscib : subscriptions) {
-    		//twits.addAll(this.getTwitsByQuantity(username, 20));
-    		twits.addAll(this.getTwits(subscib));
+    		twits.addAll(this.getTwitsByQuantity(username, quantity));
     	}
     	
     	twits.sort(new Comparator<Twit>() {
