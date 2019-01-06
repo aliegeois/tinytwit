@@ -26,11 +26,6 @@ public class HomeServlet extends HttpServlet {
 		
 		List<Twit> twits = ofy().load().type(Twit.class).order("-creation").list();
 		req.setAttribute("twits", twits);
-		
-		//HttpSession session = req.getSession();
-		//Object a = session.getAttribute("authenticatedUserName");
-	    
-	    //res.getWriter().print(a);
 		getServletContext().getRequestDispatcher("/WEB-INF/index.jsp").forward(req, res);
 	}
 	
@@ -39,7 +34,6 @@ public class HomeServlet extends HttpServlet {
 			throws IOException {
 		
 		String username = req.getParameter("username");
-		System.out.println("username: <" + username + ">");
 		if(username != null && !"".equals(username)) {
 			Key<User> userkey = Key.create(User.class, username);
 			User u = ofy().load().key(userkey).now();

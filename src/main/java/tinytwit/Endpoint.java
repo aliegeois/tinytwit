@@ -26,14 +26,8 @@ public class Endpoint {
     	path = "user/{username}",
     	httpMethod = HttpMethod.GET
     )
-    public Object getUser(@Named("username") String username) {
-    	User u = ofy().load().type(User.class).id(username).now();
-    	return new Object() {
-    		public String bite = u.getName();
-    		public List<String> subscriptions = new ArrayList<>(u.getSubscriptions());
-    		public List<String> subscribers = new ArrayList<>(u.getSubscribers());
-    	};
-    	//return ofy().load().type(User.class).id(username).now();
+    public User getUser(@Named("username") String username) {
+    	return ofy().load().type(User.class).id(username).now();
     }
     
     @ApiMethod(

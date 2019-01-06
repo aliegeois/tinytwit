@@ -15,7 +15,7 @@ import com.googlecode.objectify.annotation.Index;
 public class User {
 	@Id String name;
 	Set<String> subscriptions = new HashSet<>();
-	Set<String> subscribers = new HashSet<>();;
+	Set<String> subscribers = new HashSet<>();
 	
 	private User() {}
 	

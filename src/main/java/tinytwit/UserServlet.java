@@ -11,6 +11,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.apache.commons.lang3.StringUtils;
+
 import com.googlecode.objectify.Key;
 import com.googlecode.objectify.ObjectifyService;
 
@@ -24,6 +26,14 @@ public class UserServlet extends HttpServlet {
 	public void doGet(HttpServletRequest req, HttpServletResponse res)
 			throws IOException, ServletException {
 		
+		String path = req.getRequestURI().substring(1);
+		String[] parts = path.split("/");
+		String username = parts[parts.length-1];
+		User user = ofy().load().type(User.class).id(username).now();
+		List<Twit> twits = ofy().load().type(Twit.class).ancestor(user).list();
+		
+		req.setAttribute("user", user);
+		req.setAttribute("twits", twits);
 		getServletContext().getRequestDispatcher("/WEB-INF/user.jsp").forward(req, res);
 	}
 	
