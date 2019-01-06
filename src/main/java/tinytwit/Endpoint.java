@@ -99,7 +99,7 @@ public class Endpoint {
     	Set<String> subscriptions = this.getSubscriptions(username);
     	List<Twit> twits = new ArrayList<Twit>();
     	for(String subscib : subscriptions) {
-    		twits.addAll(this.getTwitsByQuantity(username, quantity));
+    		twits.addAll(this.getTwitsByQuantity(subscib, quantity));
     	}
     	
     	twits.sort(new Comparator<Twit>() {
