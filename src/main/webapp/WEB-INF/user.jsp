@@ -5,27 +5,23 @@
 <!DOCTYPE html>
 <html>
 	<head>
-		<meta charset="ISO-8859-1">
+		<meta charset="UTF-8">
 		<title>Insert title here</title>
 	</head>
 	<body>
 		<h1>Liste des twits de <%= ((User)request.getAttribute("user")).getName() %></h1>
-		<table border="1">
-			<tr>
-				<th>Contenu</th>
-				<th>Date</th>
-			</tr>
-			<%
-				List<Twit> twits = (List<Twit>)request.getAttribute("twits");
-				for(Twit twit : twits) {
-			%>
-			<tr>
-				<td><%= twit.getContent() %></td>
-				<td><%= twit.getCreation() %></td>
-			</tr>
-			<%
-				}
-			%>
-		</table>
+		<div id="twits"></div>
+		<script>
+		fetch('/_ah/api/tinytwit/v1/user/<%= ((User)request.getAttribute("user")).getName() %>/twits').then(response => {
+			return response.json();
+		}).then(twits => {
+			let d_twits = document.getElementById('twits');
+			for(let twit of twits.items) {
+				let d_twit = document.createElement('div');
+				d_twit.innerHTML = twit.content;
+				d_twits.appendChild(d_twit);
+			}
+		});
+		</script>
 	</body>
 </html>

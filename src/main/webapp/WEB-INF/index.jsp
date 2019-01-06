@@ -9,6 +9,7 @@
 	<head>
 		<title>Tinytwit</title>
 		<style><%@include file="./style.css"%></style>
+		<!-- <link rel="stylesheet" type="text/css" href="/style.css"> -->
 		<meta charset="utf-8" />
 	</head>
 
@@ -20,8 +21,6 @@
 		<h2><a href="/">Tinytwit ¯\_(ツ)_/¯</a></h2>
 		
 		<div id="main">
-			
-			
 			<form action="/" method="post" id="postTwit">
 				<p>
 					<textarea name="content" maxlength="70" required placeholder="Ecrivez votre super tiny twit ici ;)" onkeyup="document.getElementById('carcount').innerHTML = 
@@ -34,8 +33,7 @@ this.value.length"></textarea>
 					<input type="submit" value="Envoyer" id="submit_button" />
 				</p>
 			</form>
-		
-		
+			
 			<div id="twit_list">
 				<h5>Les derniers twits :</h5>
 					<%@ page import="java.time.*" %>
@@ -48,7 +46,6 @@ this.value.length"></textarea>
 						<a id="author" href="/user/<%= twit.getParent().getName() %>"><%= twit.getParent().getName() %></a> le <span id="date"><%= twit.getCreation() %></span> : <br />
 						<span id="content"><%= twit.getContent() %></span>
 					</p>
-
 					<%
 						}
 					%>
