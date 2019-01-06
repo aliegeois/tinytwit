@@ -11,6 +11,7 @@ import com.googlecode.objectify.annotation.Entity;
 import com.googlecode.objectify.annotation.Id;
 import com.googlecode.objectify.annotation.Index;
 import com.googlecode.objectify.annotation.Parent;
+import com.googlecode.objectify.annotation.Unindex;
 
 @Entity
 @Index
@@ -21,7 +22,7 @@ public class Twit {
 	}
 	@Id Long id;
 	@Parent Key<User> parent;
-	String content;
+	@Unindex String content;
 	Date creation;
 	
 	private Twit() {}

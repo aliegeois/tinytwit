@@ -27,34 +27,35 @@
         
         
         <script>
+        let t1 = new Date().getTime();
         fetch('/_ah/api/tinytwit/v1/user/<%= request.getAttribute("username") %>/twits').then(response => {
+        	let t2 = new Date().getTime();
+        	console.log('/twits: ' + (t2 - t1) + 'ms');
             return response.json();
         }).then(twits => {
-        	console.log(`twits: ${twits}`);
             let d_twits = document.getElementById('twits');
             for(let twit of twits.items) {
-            	console.log(twit);
                 let d_twit = document.createElement('div'),
                     parts = twit.content.split(' ');
                 for(let i = 0; i < parts.length; i++) {
                 	if(parts[i].charAt(0) === '#') {
-                		let a_tag = document.createElement('a'),
-                		    txt = parts[i].substring(1);
-                		a_tag.href = '/hashtag/' + txt;
-                		a_tag.innerHTML = txt;
+                		let a_tag = document.createElement('a');
+                		a_tag.href = '/hashtag/' + parts[i].substring(1);
+                		a_tag.innerHTML = parts[i];
                 		d_twit.appendChild(a_tag);
                 	} else {
                 		d_twit.innerHTML += parts[i];
                 	}
-                	if(i == parts.length - 2)
+                	if(i != parts.length - 1)
                 		d_twit.innerHTML += ' ';
                 }
-                d_twit.innerHTML = twit.content;
                 d_twits.appendChild(d_twit);
             }
         });
         
         fetch('/_ah/api/tinytwit/v1/user/<%= request.getAttribute("username") %>/subscriptions').then(response => {
+        	let t2 = new Date().getTime();
+        	console.log('/subscriptions: ' + (t2 - t1) + 'ms');
             return response.json();
         }).then(subs => {
             let d_subs = document.getElementById('subscriptions');
@@ -70,6 +71,8 @@
         
         
         fetch('/_ah/api/tinytwit/v1/user/<%= request.getAttribute("username") %>/subscribers').then(response => {
+        	let t2 = new Date().getTime();
+        	console.log('/subscribers: ' + (t2 - t1) + 'ms');
             return response.json();
         }).then(subs => {
             let d_subs = document.getElementById('subscribers');
@@ -84,12 +87,12 @@
         });
         
         fetch('/_ah/api/tinytwit/v1/user/<%= request.getAttribute("username") %>/twistSubscribed/20').then(response => {
+        	let t2 = new Date().getTime();
+        	console.log('/twistSubscribed: ' + (t2 - t1) + 'ms');
         	return response.json();
         }).then(twits => {
-        	console.log(`twits: ${twits}`);
             let d_twits = document.getElementById('subscribed_twits');
             for(let twit of twits.items) {
-            	console.log(twit);
                 let d_twit = document.createElement('div'),
                     parts = twit.content.split(' ');
                 for(let i = 0; i < parts.length; i++) {
@@ -113,7 +116,7 @@
         document.getElementById('to_sub').addEventListener('click', () => {
         	let name = document.getElementById('your_name').value;
         	fetch('/_ah/api/tinytwit/v1/subscribe/' + name + '/<%= request.getAttribute("username") %>').then(() => {
-        		alert('Vous êtes abonné à <%= request.getAttribute("username") %> !');;
+        		alert('Vous êtes abonné à <%= request.getAttribute("username") %> !');
         	});
         });
         </script>

@@ -115,7 +115,7 @@ public class Endpoint {
     }
     @ApiMethod(
     	path = "subscribe/{user1}/{user2}",
-    	httpMethod = HttpMethod.GET
+    	httpMethod = HttpMethod.POST
     )
     public void subscribe(@Named("user1") String user1, @Named("user2") String user2) {
     	User u1 = ofy().load().type(User.class).id(user1).now();
@@ -133,7 +133,7 @@ public class Endpoint {
     
     @ApiMethod(
     	path = "unsubscribe/{user1}/{user2}",
-    	httpMethod = HttpMethod.GET
+    	httpMethod = HttpMethod.POST
     )
     public void unsubscribe(@Named("user1") String user1, @Named("user2") String user2) {
     	User u1 = ofy().load().type(User.class).id(user1).now();

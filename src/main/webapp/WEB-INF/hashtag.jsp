@@ -14,13 +14,25 @@
         let t1 = new Date().getTime();
         fetch('/_ah/api/tinytwit/v1/hashtag/<%= request.getAttribute("hashtag") %>/twits').then(response => {
         	let t2 = new Date().getTime();
-        	console.log(`${t2 - t1}ms`);
+        	console.log(`/hashtag: ${t2 - t1}ms`);
             return response.json();
         }).then(twits => {
             let d_twits = document.getElementById('twits');
             for(let twit of twits.items) {
-                let d_twit = document.createElement('div');
-                d_twit.innerHTML = twit.content;
+                let d_twit = document.createElement('div'),
+                    parts = twit.content.split(' ');
+                for(let i = 0; i < parts.length; i++) {
+                	if(parts[i].charAt(0) === '#') {
+                		let a_tag = document.createElement('a');
+                		a_tag.href = '/hashtag/' + parts[i].substring(1);
+                		a_tag.innerHTML = parts[i];
+                		d_twit.appendChild(a_tag);
+                	} else {
+                		d_twit.innerHTML += parts[i];
+                	}
+                	if(i != parts.length - 1)
+                		d_twit.innerHTML += ' ';
+                }
                 d_twits.appendChild(d_twit);
             }
         });
