@@ -13,7 +13,7 @@
 			<h3><a href="/register">Register</a></h3>
 			<form action="/register" method="post">
 				<p id="name">
-					<label for="username">Name</label><br />
+					<label for="username">Name : </label>
 					<input type="text" name="username" required />
 				</p>
 				<p id="submit">
