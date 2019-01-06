@@ -42,7 +42,7 @@ public class Endpoint {
     	path = "user/{username}/twits/{quantity}",
     	httpMethod = HttpMethod.GET
     )
-    public List<Twit> getTwits(@Named("username") String username, @Named("quantity") int quantity) {
+    public List<Twit> getTwitsByQuantity(@Named("username") String username, @Named("quantity") int quantity) {
     	return ofy().load().type(Twit.class).ancestor(KeyFactory.createKey("User", username)).order("-creation").limit(quantity).list();
     }
     
