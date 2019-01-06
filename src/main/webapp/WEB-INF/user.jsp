@@ -36,6 +36,8 @@
 	        <div id="subscribers"></div>
         </div>
         
+        <div id="tps"></div>
+        
         
         
         <h2>S'abonner à <%= request.getAttribute("username") %></h2>
