@@ -173,3 +173,27 @@ h5 {
 	z-index: -1;
 	background-color: var(--brighter-bg-color);
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+h4 {
+	text-align: left;
+	color: var(--main-txt-color);
+	font-size: 25px;
+}
