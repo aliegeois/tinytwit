@@ -153,7 +153,7 @@ h5 {
 #twit_list #twit {
 	text-align: left;
 	padding-left: 5%;
-	border-left: 2px solid var(--main-txt-color);
+	border-left: 4px solid var(--main-txt-color);
 	word-wrap: break-word;
 	background-color: white;
 	width: 90%;
@@ -172,4 +172,28 @@ h5 {
 	left: 20%;
 	z-index: -1;
 	background-color: var(--brighter-bg-color);
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+h4 {
+	text-align: left;
+	color: var(--main-txt-color);
+	font-size: 25px;
 }

@@ -9,7 +9,7 @@
 	<head>
 		<title>Tinytwit</title>
 		<style><%@include file="./style.css"%></style>
-		<!-- <link rel="stylesheet" type="text/css" href="/style.css"> -->
+		<!-- <link rel="stylesheet" media="screen" href="./style.css" type="text/css" />"-->
 		<meta charset="utf-8" />
 	</head>
 
