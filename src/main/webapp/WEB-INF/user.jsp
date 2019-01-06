@@ -30,8 +30,10 @@
         fetch('/_ah/api/tinytwit/v1/user/<%= request.getAttribute("username") %>/twits').then(response => {
             return response.json();
         }).then(twits => {
+        	console.log(`twits: ${twits}`);
             let d_twits = document.getElementById('twits');
             for(let twit of twits.items) {
+            	console.log(twit);
                 let d_twit = document.createElement('div'),
                     parts = twit.content.split(' ');
                 for(let i = 0; i < parts.length; i++) {
@@ -42,7 +44,7 @@
                 		a_tag.innerHTML = txt;
                 		d_twit.appendChild(a_tag);
                 	} else {
-                		d_twit.innerHTML += part;
+                		d_twit.innerHTML += parts[i];
                 	}
                 	if(i == parts.length - 2)
                 		d_twit.innerHTML += ' ';

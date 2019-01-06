@@ -43,7 +43,7 @@ public class HomeServlet extends HttpServlet {
 			} else {
 				String content = req.getParameter("content");
 				
-				Twit t = new Twit(req.getParameter("content"), new Date(), userkey);
+				Twit t = new Twit(content, new Date(), userkey);
 				ofy().save().entity(t).now();
 				
 				String[] parts = content.split(" ");
