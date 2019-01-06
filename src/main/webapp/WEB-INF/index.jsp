@@ -50,9 +50,7 @@ this.value.length"></textarea>
 						}
 					%>
 			</div>
-			
+			<div id="twit_list"></div>
 		</div>
-		
-		
 	</body>
 </html>
