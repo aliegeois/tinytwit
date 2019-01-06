@@ -17,7 +17,7 @@
         fetch('/_ah/api/tinytwit/v1/hashtag/<%= request.getAttribute("hashtag") %>/twits').then(response => {
         	let t2 = new Date().getTime();
         	let t = document.createElement('div');
-        	t.innerHTML = 'Temps pour récupérer les twits : ' + (t2 - t1);
+        	t.innerHTML = 'Temps pour récupérer les twits : ' + (t2 - t1) + 'ms;
         	tps.appendChild(t);
             return response.json();
         }).then(twits => {
