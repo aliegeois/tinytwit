@@ -2,6 +2,7 @@ package tinytwit;
 
 import static com.googlecode.objectify.ObjectifyService.ofy;
 
+import java.util.Collection;
 import java.util.List;
 import java.util.Set;
 
@@ -11,6 +12,7 @@ import com.google.api.server.spi.config.ApiMethod.HttpMethod;
 import com.google.api.server.spi.config.Named;
 import com.google.appengine.api.datastore.KeyFactory;
 import com.googlecode.objectify.ObjectifyService;
+import com.googlecode.objectify.Ref;
 import com.googlecode.objectify.VoidWork;
 
 
@@ -50,8 +52,16 @@ public class Endpoint {
     	path = "hashtag/{hashtag}/twits",
     	httpMethod = HttpMethod.GET
     )
-    public List<Long> getTwitsByHashTag(@Named("hashtag") String hashtag) {
-    	return ofy().load().type(HashTag.class).id(hashtag).now().getTwits();
+    public Collection<Twit> getTwitsByHashTag(@Named("hashtag") String hashtag) {
+    	//ofy().load().type(Twit.class).ids(ofy().load().type(HashTag.class).id(hashtag).now().getTwits());
+    	HashTag h = ofy().load().type(HashTag.class).id(hashtag).now();
+    	if(h != null) {
+    		Collection<Twit> values = ofy().load().refs(h.getTwits()).values();
+    		return values;
+    	}
+    	return null;
+    	//return ofy().load().refs(ofy().load().type(HashTag.class).id(hashtag).now().getTwits()).values();
+    	//return ofy().load().type(HashTag.class).id(hashtag).now().getTwits();
     }
     
     @ApiMethod(

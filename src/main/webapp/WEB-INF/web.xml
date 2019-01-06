@@ -43,36 +43,6 @@
 		<url-pattern>/hashtag/*</url-pattern>
 	</servlet-mapping>
 	
-	
-	<!-- <servlet>
-		<servlet-name>Global</servlet-name>
-		<servlet-class>tinytwit.GlobalServlet</servlet-class>
-	</servlet>
-	
-	<servlet-mapping>
-		<servlet-name>Global</servlet-name>
-		<url-pattern>/*</url-pattern>
-	</servlet-mapping> -->
-  
-  <!-- <servlet>
-  	<servlet-name>Login</servlet-name>
-  	<servlet-class>tinytwit.LoginServlet</servlet-class>
-  </servlet>
-  
-  <servlet-mapping>
-    <servlet-name>Login</servlet-name>
-    <url-pattern>/login</url-pattern>
-  </servlet-mapping> -->  
-  
-  <!-- <filter>
-    <filter-name>RestrictionFilter</filter-name>
-    <filter-class>tinytwit.TestFilter</filter-class>
-  </filter>
-
-  <filter-mapping>
-    <filter-name>RestrictionFilter</filter-name>
-    <url-pattern>/test/*</url-pattern>
-  </filter-mapping> -->
   
 	<servlet>
 		<servlet-name>SystemServiceServlet</servlet-name>

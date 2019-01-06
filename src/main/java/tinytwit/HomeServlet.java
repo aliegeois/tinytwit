@@ -18,6 +18,7 @@ public class HomeServlet extends HttpServlet {
 	static {
 		ObjectifyService.register(User.class);
 		ObjectifyService.register(Twit.class);
+		ObjectifyService.register(HashTag.class);
 	}
 	
 	@Override
@@ -40,8 +41,30 @@ public class HomeServlet extends HttpServlet {
 			if(u == null) {
 				res.sendRedirect("/register");
 			} else {
+				String content = req.getParameter("content");
+				
 				Twit t = new Twit(req.getParameter("content"), new Date(), userkey);
-				ofy().save().entity(t);
+				ofy().save().entity(t).now();
+				
+				String[] parts = content.split(" ");
+				System.out.println(parts.length + " mots");
+				for(String part : parts) {
+					System.out.println("mot : " + part);
+					if(part.charAt(0) == '#') {
+						String tag = part.substring(1);
+						System.out.println("tag : " + tag);
+						HashTag h = ofy().load().type(HashTag.class).id(tag).now();
+						if(h == null) {
+							System.out.println("new tag");
+							h = new HashTag(tag);
+							System.out.println("twit id : " + t.id);
+							//h.addTwit(t.id);
+							h.addTwit(t);
+						}
+						ofy().save().entity(h).now();
+					}
+				}
+				
 				res.sendRedirect("/");
 			}
 		} else {
