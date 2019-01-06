@@ -34,7 +34,7 @@
                 		a_tag.innerHTML = txt;
                 		d_twit.appendChild(a_tag);
                 	} else {
-                		d_twit.innerHTML += part
+                		d_twit.innerHTML += part;
                 	}
                 	if(i == parts.length - 2)
                 		d_twit.innerHTML += ' ';
