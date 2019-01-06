@@ -51,7 +51,7 @@
         fetch('/_ah/api/tinytwit/v1/user/<%= request.getAttribute("username") %>/twits').then(response => {
         	let t2 = new Date().getTime();
         	let t = document.createElement('div');
-        	t.innerHTML = 'Temps pour récupérer les twits : ' + (t2 - t1);
+        	t.innerHTML = 'Temps pour récupérer les twits : ' + (t2 - t1) + 'ms';
         	tps.appendChild(t);
             return response.json();
         }).then(twits => {
@@ -78,7 +78,7 @@
         fetch('/_ah/api/tinytwit/v1/user/<%= request.getAttribute("username") %>/subscriptions').then(response => {
         	let t2 = new Date().getTime();
         	let t = document.createElement('div');
-        	t.innerHTML = 'Temps pour récupérer les subscriptions : ' + (t2 - t1);
+        	t.innerHTML = 'Temps pour récupérer les subscriptions : ' + (t2 - t1) + 'ms;
         	tps.appendChild(t);
             return response.json();
         }).then(subs => {
@@ -97,7 +97,7 @@
         fetch('/_ah/api/tinytwit/v1/user/<%= request.getAttribute("username") %>/subscribers').then(response => {
         	let t2 = new Date().getTime();
         	let t = document.createElement('div');
-        	t.innerHTML = 'Temps pour récupérer les subscribers : ' + (t2 - t1);
+        	t.innerHTML = 'Temps pour récupérer les subscribers : ' + (t2 - t1) + 'ms;
         	tps.appendChild(t);
             return response.json();
         }).then(subs => {
@@ -115,7 +115,7 @@
         fetch('/_ah/api/tinytwit/v1/user/<%= request.getAttribute("username") %>/twistSubscribed/20').then(response => {
         	let t2 = new Date().getTime();
         	let t = document.createElement('div');
-        	t.innerHTML = 'Temps pour récupérer les twistSubscribed : ' + (t2 - t1);
+        	t.innerHTML = 'Temps pour récupérer les twistSubscribed : ' + (t2 - t1) + 'ms;
         	tps.appendChild(t);
         	return response.json();
         }).then(twits => {
