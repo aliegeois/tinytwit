@@ -53,7 +53,7 @@ public class GlobalServlet extends HttpServlet {
 	public void doPost(HttpServletRequest req, HttpServletResponse res)
 			throws IOException {
 		
-		String username = req.getParameter("username");
+		/*String username = req.getParameter("username");
 		System.out.println("username: <" + username + ">");
 		if(username != null && !"".equals(username)) {
 			Key<User> userkey = Key.create(User.class, username);
@@ -67,6 +67,6 @@ public class GlobalServlet extends HttpServlet {
 			}
 		} else {
 			res.sendRedirect("/register");			
-		}
+		}*/
 	}
 }

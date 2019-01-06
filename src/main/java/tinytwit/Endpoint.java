@@ -16,7 +16,7 @@ import com.googlecode.objectify.VoidWork;
 
 
 @Api(name = "tinytwit")
-public class TestEndpoint {
+public class Endpoint {
 	static {
 		ObjectifyService.register(User.class);
 		ObjectifyService.register(Twit.class);

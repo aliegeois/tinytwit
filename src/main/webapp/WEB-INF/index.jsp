@@ -17,14 +17,15 @@
 		<div id="lerubanblanc"></div>
 		
 		<nav><a href="/register">deconnexion</a></nav>
-		<h2><a href="/">Tinytwit ¯\_(:/)_/¯</a></h2>
+		<h2><a href="/">Tinytwit ¯\_(ツ)_/¯</a></h2>
 		
 		<div id="main">
 			
 			
 			<form action="/" method="post" id="postTwit">
 				<p>
-					<textarea name="content" maxlength="70" required placeholder="Ecrivez votre super tiny twit ici ;)" onkeydown="document.getElementById('carcount').innerHTML = 
+					<textarea name="content" maxlength="70" required placeholder="Ecrivez votre super tiny twit ici ;)" onkeyup="document.getElementById('carcount').innerHTML = 
+this.value.length" onkeydown="document.getElementById('carcount').innerHTML = 
 this.value.length"></textarea>
 				<span id="carcount">0</span>/70
 				</p>

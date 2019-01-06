@@ -1,15 +1,15 @@
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-    pageEncoding="ISO-8859-1"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
 	<head>
-		<meta charset="ISO-8859-1">
+		<meta charset="UTF-8">
 		<!--<link rel="stylesheet" href="./register.css" />-->
 		<style><%@include file="./style.css"%></style>
-		<title>TinyTwitt, le twitter du futur passé</title>
+		<title>TinyTwitt, le twitter du futur passÃ©</title>
 	</head>
 	<body>
-		<h1><a href="/register">Tinytwit ¯\_(:/)_/¯</a></h1>
+		<h1><a href="/register">Tinytwit Â¯\_(ãƒ„)_/Â¯</a></h1>
 		
 		<div id="registering">
 			<h3><a href="/register">Register</a></h3>
