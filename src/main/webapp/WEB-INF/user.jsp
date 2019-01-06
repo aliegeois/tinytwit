@@ -27,10 +27,13 @@
         
         
         <script>
-        let t1 = new Date().getTime();
+        let t1 = new Date().getTime(),
+    	    tps = document.getElementById('tps');
         fetch('/_ah/api/tinytwit/v1/user/<%= request.getAttribute("username") %>/twits').then(response => {
         	let t2 = new Date().getTime();
-        	console.log('/twits: ' + (t2 - t1) + 'ms');
+        	let t = document.createElement('div');
+        	t.innerHTML = 'Temps pour récupérer les twits : ' + (t2 - t1);
+        	tps.appendChild(t);
             return response.json();
         }).then(twits => {
             let d_twits = document.getElementById('twits');
@@ -55,7 +58,9 @@
         
         fetch('/_ah/api/tinytwit/v1/user/<%= request.getAttribute("username") %>/subscriptions').then(response => {
         	let t2 = new Date().getTime();
-        	console.log('/subscriptions: ' + (t2 - t1) + 'ms');
+        	let t = document.createElement('div');
+        	t.innerHTML = 'Temps pour récupérer les subscriptions : ' + (t2 - t1);
+        	tps.appendChild(t);
             return response.json();
         }).then(subs => {
             let d_subs = document.getElementById('subscriptions');
@@ -72,7 +77,9 @@
         
         fetch('/_ah/api/tinytwit/v1/user/<%= request.getAttribute("username") %>/subscribers').then(response => {
         	let t2 = new Date().getTime();
-        	console.log('/subscribers: ' + (t2 - t1) + 'ms');
+        	let t = document.createElement('div');
+        	t.innerHTML = 'Temps pour récupérer les subscribers : ' + (t2 - t1);
+        	tps.appendChild(t);
             return response.json();
         }).then(subs => {
             let d_subs = document.getElementById('subscribers');
@@ -88,7 +95,9 @@
         
         fetch('/_ah/api/tinytwit/v1/user/<%= request.getAttribute("username") %>/twistSubscribed/20').then(response => {
         	let t2 = new Date().getTime();
-        	console.log('/twistSubscribed: ' + (t2 - t1) + 'ms');
+        	let t = document.createElement('div');
+        	t.innerHTML = 'Temps pour récupérer les twistSubscribed : ' + (t2 - t1);
+        	tps.appendChild(t);
         	return response.json();
         }).then(twits => {
             let d_twits = document.getElementById('subscribed_twits');
@@ -108,7 +117,6 @@
                 	if(i == parts.length - 2)
                 		d_twit.innerHTML += ' ';
                 }
-                d_twit.innerHTML = twit.content;
                 d_twits.appendChild(d_twit);
             }
         });

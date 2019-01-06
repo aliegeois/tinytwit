@@ -10,11 +10,15 @@
     <body>
         <h1>Liste des twits contenant #<%= request.getAttribute("hashtag") %></h1>
         <div id="twits"></div>
+        <div id="temps"></div>
         <script>
-        let t1 = new Date().getTime();
+        let t1 = new Date().getTime(),
+            tps = document.getElementById('tps');
         fetch('/_ah/api/tinytwit/v1/hashtag/<%= request.getAttribute("hashtag") %>/twits').then(response => {
         	let t2 = new Date().getTime();
-        	console.log(`/hashtag: ${t2 - t1}ms`);
+        	let t = document.createElement('div');
+        	t.innerHTML = 'Temps pour récupérer les twits : ' + (t2 - t1);
+        	tps.appendChild(t);
             return response.json();
         }).then(twits => {
             let d_twits = document.getElementById('twits');
