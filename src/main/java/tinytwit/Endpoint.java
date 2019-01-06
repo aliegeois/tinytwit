@@ -39,6 +39,14 @@ public class Endpoint {
     }
     
     @ApiMethod(
+    	path = "user/{username}/twits/{quantity}",
+    	httpMethod = HttpMethod.GET
+    )
+    public List<Twit> getTwits(@Named("username") String username, @Named("quantity") int quantity) {
+    	return ofy().load().type(Twit.class).ancestor(KeyFactory.createKey("User", username)).order("-creation").limit(quantity).list();
+    }
+    
+    @ApiMethod(
     	path = "user/{username}/subscriptions",
     	httpMethod = HttpMethod.GET
     )
