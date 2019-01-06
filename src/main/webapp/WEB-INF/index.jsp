@@ -45,7 +45,7 @@ this.value.length"></textarea>
 					%>
 					<p id="twit">
 						<!-- <span id="author"><%= twit.getParent().getName() %></span> le <span id="dateDays"><%= twit.getCreation().getDay() %>/<%= twit.getCreation().getMonth()+1 %></span> à <span id="dateHours"><%= twit.getCreation().getHours() %>h<%= twit.getCreation().getMinutes() %></span> : <br />-->
-						<span id="author"><%= twit.getParent().getName() %></span> le <span id="date"><%= twit.getCreation() %></span> : <br />
+						<a id="author" href="/user/<%= twit.getParent().getName() %>"><%= twit.getParent().getName() %></a> le <span id="date"><%= twit.getCreation() %></span> : <br />
 						<span id="content"><%= twit.getContent() %></span>
 					</p>
 
