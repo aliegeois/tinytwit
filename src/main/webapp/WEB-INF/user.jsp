@@ -57,7 +57,7 @@
         });
         document.getElementById('to_sub').addEventListener('click', () => {
         	let name = document.getElementById('your_name').value;
-        	fetch('/_ah/api/tinytwit/v1/subscribe/' + name + '/' + <%= ((User)request.getAttribute("user")).getName() %>).then(() => {
+        	fetch('/_ah/api/tinytwit/v1/subscribe/' + name + '/<%= ((User)request.getAttribute("user")).getName() %>').then(() => {
         		alert('Vous êtes abonné à <%= ((User)request.getAttribute("user")).getName() %> !');;
         	});
         });
