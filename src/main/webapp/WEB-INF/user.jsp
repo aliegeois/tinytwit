@@ -6,23 +6,40 @@
 <html>
     <head>
         <meta charset="UTF-8">
-        <title>Insert title here</title>
+        <style><%@include file="./style.css"%></style>
+        <title>TinyTwit : <%= request.getAttribute("username") %></title>
     </head>
     <body>
-        <h1>Liste des twits de <%= request.getAttribute("username") %></h1>
-        <div id="twits"></div>
+    
+    	<nav><a href="/register">deconnexion</a></nav>
+		<h2><a href="/">Tinytwit ¯\_(ツ)_/¯</a></h2>
+		
+    	<h4 id="username"><%= request.getAttribute("username") %></h4>
+    	
+    	<div id="div_twits">
+	        <h6>Les derniers twits de <%= request.getAttribute("username") %></h6>
+	        <div id="twits"></div>
+        </div>
         
-        <h2>Abonnements</h2>
-        <div id="subscriptions"></div>
+        <div id="twits_recommandes">
+	        <h6>Les twits recommandés pour vous</h6>
+	        <div id="subscribed_twits"></div>
+	    </div>
+	    
+        <div id="div_abonnements">
+	        <h6>Abonnements</h6>
+	        <div id="subscriptions"></div>
+        </div>
         
-        <h2>Abonnés</h2>
-        <div id="subscribers"></div>
+        <div id="div_abonnes">
+	        <h6>Abonnés</h6>
+	        <div id="subscribers"></div>
+        </div>
         
-        <h2>Les twits recommandés pour vous</h2>
-        <div id="subscribed_twits"></div>
+        
         
         <h2>S'abonner à <%= request.getAttribute("username") %></h2>
-        <label>Votre nom: </label><input id="your_name" type="text">
+        <label>Votre nom: </label><input id="your_name" type="text" required />
         <button id="to_sub">S'abonner !</button>
         
         
@@ -90,8 +107,8 @@
             let d_twits = document.getElementById('subscribed_twits');
             for(let twit of twits.items) {
             	console.log(twit);
-                let d_twit = document.createElement('div'),
-                    parts = twit.content.split(' ');
+                let d_twit = document.createElement('div');
+                let parts = twit.content.split(' ');
                 for(let i = 0; i < parts.length; i++) {
                 	if(parts[i].charAt(0) === '#') {
                 		let a_tag = document.createElement('a'),
@@ -105,16 +122,21 @@
                 	if(i == parts.length - 2)
                 		d_twit.innerHTML += ' ';
                 }
-                d_twit.innerHTML = twit.content;
+                d_twit.innerHTML = twit.parent.name + " : " + twit.content;
                 d_twits.appendChild(d_twit);
             }
         });
         
         document.getElementById('to_sub').addEventListener('click', () => {
         	let name = document.getElementById('your_name').value;
-        	fetch('/_ah/api/tinytwit/v1/subscribe/' + name + '/<%= request.getAttribute("username") %>').then(() => {
-        		alert('Vous êtes abonné à <%= request.getAttribute("username") %> !');;
-        	});
+        	console.log(name);
+        	if(name != null && name != "") {
+	        	fetch('/_ah/api/tinytwit/v1/subscribe/' + name + '/<%= request.getAttribute("username") %>').then(() => {
+	        		alert('Vous êtes abonné à <%= request.getAttribute("username") %> !');
+	        	});
+        	} else {
+        		alert('Vous devez mettre un nom, sinon ça marchera beaucoup moins bien');
+        	}
         });
         </script>
     </body>

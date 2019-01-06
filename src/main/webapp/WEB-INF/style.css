@@ -193,7 +193,18 @@ h5 {
 
 
 h4 {
-	text-align: left;
+	text-align: center;
 	color: var(--main-txt-color);
-	font-size: 25px;
+	font-size: 35px;
+}
+#div_twits,  #div_abonnements, #div_abonnes, #twits_recommandes {
+	border: 1px solid black;
+	width: 23%;
+	display: inline-block;
+	vertical-align: top;
+	background-color: var(--brighter-bg-color);
+} 
+h6 {
+	font-size: 20px;
+	font-weight: bold;
 }
