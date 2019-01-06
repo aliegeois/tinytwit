@@ -7,6 +7,7 @@ import java.util.Date;
 import java.util.List;
 
 import javax.servlet.ServletException;
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -14,18 +15,22 @@ import javax.servlet.http.HttpServletResponse;
 import com.googlecode.objectify.Key;
 import com.googlecode.objectify.ObjectifyService;
 
-public class TwitServlet extends HttpServlet {
+public class HashTagServlet extends HttpServlet {
 	static {
-		ObjectifyService.register(Twit.class);
+		ObjectifyService.register(HashTag.class);
 	}
 	
 	@Override
 	public void doGet(HttpServletRequest req, HttpServletResponse res)
 			throws IOException, ServletException {
-		System.out.println(req.getPathInfo().substring(1));
-		List<Twit> twits = ofy().load().type(Twit.class).order("-creation").list();
-		req.setAttribute("twits", twits);
-		getServletContext().getRequestDispatcher("/WEB-INF/index.jsp").forward(req, res);
+		
+		String path = req.getRequestURI().substring(1);
+		String[] parts = path.split("/");
+		String hashtag = parts[parts.length-1];
+		
+		req.setAttribute("hashtag", hashtag);
+		
+		getServletContext().getRequestDispatcher("/WEB-INF/hashtag.jsp").forward(req, res);
 	}
 	
 	@Override
@@ -33,9 +38,10 @@ public class TwitServlet extends HttpServlet {
 			throws IOException {
 		
 		String username = req.getParameter("username");
-		Key<User> userkey = Key.create(User.class, username);
-		Twit t = new Twit(req.getParameter("content"), new Date(), userkey);
-		ofy().save().entity(t);
+		String password = req.getParameter("password");
+		
+		User newUser = new User(username);
+		ofy().save().entity(newUser);
 		
 		res.sendRedirect("/");
 	}

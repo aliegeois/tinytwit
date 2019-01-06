@@ -2,7 +2,6 @@ package tinytwit;
 
 import static com.googlecode.objectify.ObjectifyService.ofy;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 
@@ -20,7 +19,16 @@ public class Endpoint {
 	static {
 		ObjectifyService.register(User.class);
 		ObjectifyService.register(Twit.class);
+		ObjectifyService.register(HashTag.class);
 	}
+	
+	@ApiMethod(
+    	path = "twit/{id}",
+    	httpMethod = HttpMethod.GET
+    )
+    public Twit getTwit(@Named("id") int id) {
+    	return ofy().load().type(Twit.class).id(id).now();
+    }
     
     @ApiMethod(
     	path = "user/{username}",
@@ -36,6 +44,14 @@ public class Endpoint {
     )
     public List<Twit> getTwits(@Named("username") String username) {
     	return ofy().load().type(Twit.class).ancestor(KeyFactory.createKey("User", username)).list();
+    }
+    
+    @ApiMethod(
+    	path = "hashtag/{hashtag}/twits",
+    	httpMethod = HttpMethod.GET
+    )
+    public List<Long> getTwitsByHashTag(@Named("hashtag") String hashtag) {
+    	return ofy().load().type(HashTag.class).id(hashtag).now().getTwits();
     }
     
     @ApiMethod(

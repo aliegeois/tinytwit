@@ -35,12 +35,12 @@ public class User {
 		}
 	}
 	
-	public void addSubscriber(String username) {
-		subscribers.add(username);
-	}
-	
 	public Set<String> getSubscriptions() {
 		return subscriptions;
+	}
+	
+	public void addSubscriber(String username) {
+		subscribers.add(username);
 	}
 	
 	public void removeSubscriber(String username) {

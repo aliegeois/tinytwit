@@ -33,6 +33,17 @@
 	</servlet-mapping>
 	
 	
+	<servlet>
+		<servlet-name>HashTag</servlet-name>
+		<servlet-class>tinytwit.HashTagServlet</servlet-class>
+	</servlet>
+	
+	<servlet-mapping>
+		<servlet-name>HashTag</servlet-name>
+		<url-pattern>/hashtag/*</url-pattern>
+	</servlet-mapping>
+	
+	
 	<!-- <servlet>
 		<servlet-name>Global</servlet-name>
 		<servlet-class>tinytwit.GlobalServlet</servlet-class>

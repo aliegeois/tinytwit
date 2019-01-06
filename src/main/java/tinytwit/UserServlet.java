@@ -29,11 +29,8 @@ public class UserServlet extends HttpServlet {
 		String path = req.getRequestURI().substring(1);
 		String[] parts = path.split("/");
 		String username = parts[parts.length-1];
-		User user = ofy().load().type(User.class).id(username).now();
-		List<Twit> twits = ofy().load().type(Twit.class).ancestor(user).list();
 		
-		req.setAttribute("user", user);
-		req.setAttribute("twits", twits);
+		req.setAttribute("username", username);
 		getServletContext().getRequestDispatcher("/WEB-INF/user.jsp").forward(req, res);
 	}
 	
