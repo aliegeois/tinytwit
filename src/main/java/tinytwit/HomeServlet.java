@@ -57,10 +57,9 @@ public class HomeServlet extends HttpServlet {
 						if(h == null) {
 							System.out.println("new tag");
 							h = new HashTag(tag);
-							System.out.println("twit id : " + t.id);
-							//h.addTwit(t.id);
-							h.addTwit(t);
+							System.out.println("twit : " + t);
 						}
+						h.addTwit(t);
 						ofy().save().entity(h).now();
 					}
 				}

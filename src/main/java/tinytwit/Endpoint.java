@@ -3,8 +3,8 @@ package tinytwit;
 import static com.googlecode.objectify.ObjectifyService.ofy;
 
 import java.util.ArrayList;
-import java.util.Comparator;
 import java.util.Collection;
+import java.util.Comparator;
 import java.util.List;
 import java.util.Set;
 
@@ -14,7 +14,6 @@ import com.google.api.server.spi.config.ApiMethod.HttpMethod;
 import com.google.api.server.spi.config.Named;
 import com.google.appengine.api.datastore.KeyFactory;
 import com.googlecode.objectify.ObjectifyService;
-import com.googlecode.objectify.Ref;
 import com.googlecode.objectify.VoidWork;
 
 
@@ -79,7 +78,7 @@ public class Endpoint {
     	httpMethod = HttpMethod.GET
     )
     public Set<String> getSubscriptions(@Named("username") String username) {
-    	System.out.println("flag 1");
+    	//System.out.println("flag 1");
     	return ofy().load().type(User.class).id(username).now().getSubscriptions();
     }
     
@@ -96,7 +95,7 @@ public class Endpoint {
         	httpMethod = HttpMethod.GET
     )
     public List<Twit> getSubscribedTwit(@Named("username") String username) {
-    	System.out.println("flag 0");
+    	//System.out.println("flag 0");
     	Set<String> subscriptions = this.getSubscriptions(username);
     	List<Twit> twits = new ArrayList<Twit>();
     	for(String subscib : subscriptions) {
@@ -111,7 +110,7 @@ public class Endpoint {
     	    }
     	});
     	
-    	System.out.println("Taille : " + twits.size());
+    	//System.out.println("Taille : " + twits.size());
     	return twits;
     	
     }
