@@ -1,5 +1,5 @@
 # tinytwit
-Mini projet twitter 🍑
+Mini projet twitter 🍑 par Arthur Liégeois, Ronan Guéguen, Antoine Godet, Charles Bequet--Ermoy
 
 
 Message à la pauvre âme perdue qui passerait par là : 
