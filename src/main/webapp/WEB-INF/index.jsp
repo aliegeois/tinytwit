@@ -38,12 +38,14 @@ this.value.length"></textarea>
 		
 			<div id="twit_list">
 				<h5>Les derniers twits :</h5>
+					<%@ page import="java.time.*" %>
 					<%
 						List<Twit> twits = (List<Twit>) request.getAttribute("twits");
 						for (Twit twit : twits) {
 					%>
 					<p id="twit">
-						<span id="author"><%= twit.getParent().getName() %></span> à <span id="date"><%= twit.getCreation() %></span> : <br />
+						<!-- <span id="author"><%= twit.getParent().getName() %></span> le <span id="dateDays"><%= twit.getCreation().getDay() %>/<%= twit.getCreation().getMonth()+1 %></span> à <span id="dateHours"><%= twit.getCreation().getHours() %>h<%= twit.getCreation().getMinutes() %></span> : <br />-->
+						<span id="author"><%= twit.getParent().getName() %></span> le <span id="date"><%= twit.getCreation() %></span> : <br />
 						<span id="content"><%= twit.getContent() %></span>
 					</p>
 
