@@ -198,12 +198,16 @@ h4 {
 	font-size: 35px;
 }
 #div_twits,  #div_abonnements, #div_abonnes, #twits_recommandes {
-	border: 1px solid black;
 	width: 23%;
 	display: inline-block;
 	vertical-align: top;
 	background-color: var(--brighter-bg-color);
-} 
+}
+#div_twits div, #twits_recommandes div {
+	text-align: left;
+	margin-left: 10%;
+	margin-right: 10%;
+}
 h6 {
 	font-size: 20px;
 	font-weight: bold;
